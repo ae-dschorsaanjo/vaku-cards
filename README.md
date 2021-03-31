@@ -1,2 +1,22 @@
 # vaku-cards
-Simple flashcard application written in JavaScript, focusing on simplicity
+
+https://img.shields.io/badge/License-BSD%202--Clause-green.svg
+
+Simple flashcard application written in JavaScript, focusing on simplicity.
+
+The cards are read from simple text input and parsed as minUp text.
+minUp allows the following text formattings:
+
+- `*bold*`
+- `_italic_`
+- `{comment}` not shown in output
+- ``` `mono` ```
+- `[note]` note (shows as "NOTE: " wherever it's written)
+- `text|link` for links (converts a single word into a link)
+
+## License
+
+Copyright (c) 2021, B. Zoltán Gorza (ae-dschorsaanjo)
+
+The code is under BSD 2-Clause ("Simplified BSD") license, while the flashcard
+definition files shall be under some other license, once they become to be.
