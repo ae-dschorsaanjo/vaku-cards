@@ -1,6 +1,6 @@
 # Vaku Cards
 
-https://img.shields.io/badge/License-BSD%202--Clause-green.svg
+[![License](https://img.shields.io/badge/License-BSD%202--Clause-green.svg)](https://opensource.org/licenses/BSD-2-Clause)
 
 Simple flashcard application written in JavaScript, focusing on simplicity.
 
