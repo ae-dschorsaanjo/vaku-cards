@@ -1,4 +1,4 @@
-# vaku-cards
+# Vaku Cards
 
 https://img.shields.io/badge/License-BSD%202--Clause-green.svg
 
