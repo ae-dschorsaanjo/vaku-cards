@@ -7,12 +7,14 @@ Simple flashcard application written in JavaScript, focusing on simplicity.
 The cards are read from simple text input and parsed as minUp text.
 minUp allows the following text formattings:
 
-- `*bold*`
-- `_italic_`
+- `*bold*` (inline)
+- `_italic_` italic (inline)
 - `{comment}` not shown in output
-- ``` `mono` ```
+- ``` `mono` ``` monospace (inline)
 - `[note]` note (shows as "NOTE: " wherever it's written)
 - `text|link` for links (converts a single word into a link)
+- ``` `< monoblock >` ``` monospace block
+
 
 ## License
 
