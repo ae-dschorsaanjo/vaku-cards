@@ -43,6 +43,24 @@ class VakuCard {
         return this.show()
     }
 
+    /**
+     * Regardless of which side is facing, it'll always set the card to
+     * show the front side.
+     */
+    flipToFront() {
+        this._frontFacing = true;
+        return this._front;
+    }
+
+    /**
+     * Regardless of which side is facing, it'll always set the card to
+     * show the back side.
+     */
+    flipToBack() {
+        this._frontFacing = false;
+        return this._back;
+    }
+
     get front() {
         return this._front;
     }
@@ -52,7 +70,7 @@ class VakuCard {
     }
 
     get answer() {
-        return this._answer;
+        return this._answer || this._back;
     }
 
     // probably flip() will do this.
@@ -62,7 +80,7 @@ class VakuCard {
     // }
 }
 
-const GameSettings = Object.seal({
+const VakuGameSettings = Object.seal({
     numberOfCards: 1,
     numberOfAnswers: 2,
     backFirst: false,
@@ -82,7 +100,7 @@ const GameSettings = Object.seal({
  * If the number mod 7 equals 6 equals 0 or 1, then the size is fixed and
  * the number of used cards should be read from GameSettings.
  */
-const DeckMode = Object.freeze({
+const VakuDeckMode = Object.freeze({
     FIXED_QUIZ: 0,
     FIXED_QUIZ_SHUFFLE: 1,
     FULL_QUIZ: 2,
@@ -92,10 +110,17 @@ const DeckMode = Object.freeze({
     FIXED: 6,
     FIXED_SHUFFLE: 7,
     FULL: 8,
-    FULL_SHUFFLE: 9
+    FULL_SHUFFLE: 9,
+    valueToString: function(n) {
+        let s = Object.keys(this).find(key => this[key] === n);
+        return s[0].toUpperCase() + s.slice(1).toLowerCase().replace(/_/g, " ");
+    },
+    toList: function() {
+        return Object.keys(this).map(k => k[0].toUpperCase() + k.slice(1).toLowerCase().replace(/_/g, " "));
+    }
 });
 
-class Deck {
+class VakuDeck {
     _origCards = [];
     _cards = [];
     _mode = -1;
@@ -104,15 +129,7 @@ class Deck {
     _isFirst = true;
 
     constructor(mode, cards) {
-        if (Object.values(DeckMode).includes(mode)) {
-            this._mode = mode;
-        }
-        else {
-            throw "Selected mode is not valid."
-        }
-        if (cards.length < 2) {
-            throw "You need to have at least 2 cards.";
-        }
+        this._mode = mode;
         this._origCards = cards;
         this._init();
     }
@@ -169,13 +186,17 @@ class Deck {
         return this._cards.length;
     }
 
+    get mode() {
+        return this._mode;
+    }
+
     _init() {
         this._cards = [...this._origCards];
         if (this.isQuiz) {
-            this._bogo();
+            this._bogo(this._cards);
         }
-        if (mode % 6 < 2) {
-            this._cards.slice(0, GameSettings.numberOfCards);
+        if (this._mode % 6 < 2) {
+            this._cards.slice(0, VakuGameSettings.numberOfCards);
         }
         this._idx = 0;
         this._isLast = false;
@@ -190,7 +211,7 @@ class Deck {
     }
 
     getAnswers() {
-        const n = Math.min(this._cards.length, GameSettings.numberOfAnswers);
+        const n = Math.min(this._cards.length, VakuGameSettings.numberOfAnswers);
         const a = [this.current.answer];
         let i = 0;
         while (a.length < n) {
@@ -210,6 +231,35 @@ class Deck {
         this._init();
     }
 }
+
+class VakuParser {
+
+}
+
+class VakuGame {
+    _deck;
+
+    constructor(mode, cards) {
+        if (Object.values(VakuDeckMode).includes(mode)) {
+            this._mode = mode;
+        }
+        else {
+            throw "Selected mode is not valid."
+        }
+        if (cards.length < 2) {
+            throw "You need to have at least 2 cards.";
+        }
+        this._deck = new VakuDeck(mode, cards);
+    }
+
+    get modeString() {
+        return VakuDeckMode.valueToString(this._deck.mode);
+    }
+}
+    
+let v = new VakuGame(VakuDeckMode.FULL_QUIZ_SHUFFLE, [new VakuCard('a', 'b'), new VakuCard('c', 'd')]);
+console.log(v.modeString);
+
 
 /*
  * NOTES (to self):
