@@ -18,7 +18,7 @@ minUp allows the following text formattings:
 
 ## License
 
-Copyright (c) 2021, B. Zoltán Gorza (ae-dschorsaanjo)
+Copyright (c) 2021, ae-dschorsaanjo (b.zoltan.gorza@gmail.com)
 
 The code is under BSD 2-Clause ("Simplified BSD") license, while the flashcard
 definition files shall be under some other license, once they become to be.
