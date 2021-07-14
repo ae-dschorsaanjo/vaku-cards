@@ -2,6 +2,10 @@
 
 [![License](https://img.shields.io/badge/License-BSD%202--Clause-green.svg)](https://opensource.org/licenses/BSD-2-Clause)
 
+Project is currently on hold until future plans are finalized
+
+---
+
 Simple flashcard application written in JavaScript, focusing on simplicity.
 
 The cards are read from simple text input and parsed as minUp text.
