@@ -66,7 +66,7 @@ var minUp = {
         if (text.indexOf('{') != -1)
             text = text.replace(/{.*}/g, "")
         if (text.indexOf('|') != -1)
-            text = text.replace(/[\s\n]([\w*_`\|]+)\|((http:\/\/www\.|https:\/\/www\.|http:\/\/|https:\/\/)?[a-z0-9]+([\-\.]{1}[a-z0-9]+)*\.[a-z]{2,63}(:[0-9]{1,5})?(\/.*)?)[\s\n]/g, (_, m1, m2) => ` <a href="${encodeURI(m2).replaceAll("'", "%27")}" target="_blank">${m1.replaceAll("|", " ")}</a> `)
+            text = text.replace(/[\s\n]([\w*_`.\|]+)\|((http:\/\/www\.|https:\/\/www\.|http:\/\/|https:\/\/)?[a-z0-9]+([\-\.]{1}[a-z0-9]+)*\.[a-z]{2,63}(:[0-9]{1,5})?(\/.*)?)[\s\n]/g, (_, m1, m2) => ` <a href="${encodeURI(m2).replaceAll("'", "%27")}" target="_blank">${m1.replaceAll("|", " ")}</a> `)
         if (text.indexOf('*') != -1)
             text = text.replace(/\*(\S[^\*\n]+\S)\*/g, "<b>$1</b>")
         if (text.indexOf('_') != -1)
